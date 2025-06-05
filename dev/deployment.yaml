@@ -3,10 +3,10 @@ kind: Deployment
 metadata:
   name: myapp
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: myapp
-  replicas: 1
   template:
     metadata:
       labels:
@@ -14,6 +14,9 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: nanajanashia/argocd-app:1.2
+        image: hashicorp/http-echo
+        args:
+          - "-text=Hello from ARM64!"
+          - "-listen=:8080"
         ports:
         - containerPort: 8080
